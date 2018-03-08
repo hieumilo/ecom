@@ -1,0 +1,41 @@
+<div class="product-easy">
+    <div class="container">
+        <div class="ele-bottom-grid">
+            <h3>{{ 'PRODUCT_LIST.RECENTLY' | translate }}</h3>
+            <div class="text-center" ng-if="!products.length">
+                <h4>You have not seen any products</h4>
+            </div>
+            <div class="col-md-3 product-men" ng-if="products.length" ng-repeat="product in products">
+                <div class="men-pro-item simpleCart_shelfItem">
+                    <div class="men-thumb-item">
+                        <img ng-src="{{ product.images[0].image }}" alt="" class="pro-image-front">
+                        <img ng-src="{{ product.images[0].image }}" alt="" class="pro-image-back">
+                        <div class="men-cart-pro">
+                            <div class="inner-men-cart-pro">
+                                <a ui-sref="home.product-detail({name: product.slug})" 
+                                class="link-product-add-cart">
+                                    {{ 'PRODUCT_LIST.QUICK_VIEW' | translate }}
+                                    </a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="item-info-product ">
+                        <h4>
+                            <a ui-sref="home.product-detail({name: product.slug})">{{ product.name }}</a>
+                        </h4>
+                        <div class="info-product-price">
+                            <span class="item_price">{{ product.price | currency }}</span>
+                        </div>
+                        <a class="item_add single-item hvr-outline-out button2" 
+                        ng-if="product.stock"
+                        ng-click="addItem(product.id, product.name, product.images[0].image, product.price)">
+                            {{ 'PRODUCT_LIST.ADD_TO_CART' | translate }}
+                        </a>                                    
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>

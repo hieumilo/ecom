@@ -1,0 +1,149 @@
+<div class="single">
+    <div class="container">
+        <div class="col-md-7 single-right-left animated wow slideInUp animated">
+            <flex-slider slide="img in images" animation="slide" control-nav="thumbnails">
+                <li data-thumb="{{ img }}">
+                    <img ng-src="{{ img }}">
+                </li>
+            </flex-slider>
+        </div>
+        <div class="col-md-5 single-right-left simpleCart_shelfItem animated wow slideInRight animated">
+            <h3>{{ product.name }}</h3>
+            <p><span class="item_price">{{ product.price | currency }}</span></p>
+            <p><span class="rating1 "><h4>Category: 
+                <a ui-sref="home.product-list({ name: category.slug })">{{ product.category.name }}</a></h4>
+            </span></p>
+            <div class="rating1">
+                <h4>Item also: {{ product.stock }} </h4>
+            </div>
+            <p></p>
+            <div class="rating1">
+                <star-rating ng-model="rating1" max="5" readonly="true"></star-rating>
+            </div>
+            <div ng-if="isAuthenticated">
+                <star-rating ng-model="rating" 
+                max="5" 
+                on-rating-select="rate(rating)" 
+                readonly="!isReadonly"></star-rating>
+            </div>
+            <p></p>
+            <div class="rating1">
+                <div fb-like="like.Url"></div>
+            </div>
+            <p></p>
+            <div class="occasion-cart">
+                <a href="" 
+                    class="item_add hvr-outline-out button2" 
+                    ng-if="product.stock"
+                    ng-click="addItem(product.id, product.name, product.images[0].image, product.price)">
+                    {{ 'PRODUCT_DETAIL.ADD_TO_CART' | translate }}
+                </a>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="bootstrap-tab animated wow slideInUp animated">
+            <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+                <ul id="myTab" class="nav nav-tabs" role="tablist">
+                    <li role="presentation" ng-class="{ active: isSet(1) }">
+                        <a href="" id="" role="tab" data-toggle="tab" aria-expanded="false" ng-click="setTab(1)">
+                            {{ 'PRODUCT_DETAIL.DESCRIPTION' | translate }}
+                        </a>
+                    </li>
+                    <li role="presentation" ng-class="{ active: isSet(2) }">
+                        <a href="" role="tab" id="" data-toggle="tab"  ng-click="setTab(2)">
+                            {{ 'PRODUCT_DETAIL.COMMENT' | translate }}
+                        </a>
+                    </li>
+                </ul>
+                <div id="" class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade bootstrap-tab-text in" ng-class="{ active: isSet(1) }">
+                        <h5>{{ 'PRODUCT_DETAIL.PRODUCT_DESCRIPTION' | translate }}</h5>
+                        <p>{{ product.description }}</p>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade bootstrap-tab-text in" ng-class="{ active: isSet(2) }">
+                        <div ng-if="isAuthenticated" ng-if="formCmt" class="row">
+                            <form>
+                                <div class="form-group">
+                                    <textarea class="form-control" rows="3" ng-model="$parent.content"></textarea>
+                                </div>
+                                <div class="form-group pull-right">
+                                    <button type="button" ng-click="send({parent_id: 0, content: content})" 
+                                    class="btn btn-primary">comment</button>
+                                </div>
+                            </form>
+                        </div>
+                        <script type="text/ng-template" id="categoryTree">
+                            <div class="bootstrap-tab-text-grid">
+                                <div class="bootstrap-tab-text-grid-left">
+                                    <img ng-src="{{ comment.user.avatar }}" alt="{{ comment.user.name }}" class="img-responsive">
+                                </div>
+                                <div class="bootstrap-tab-text-grid-right">
+                                    <ul>
+                                        <li>
+                                            <a href="">{{ comment.user.name }}</a>
+                                            <small>{{ comment.created_at | timeago }}</small>
+                                        </li>
+                                        <li>
+                                            <a href="" ng-click="setComment(comment.id)">
+                                                <span class="glyphicon glyphicon-share" aria-hidden="true"></span>
+                                            </a>
+                                            
+                                            <a href="" ng-if="comment.user_id == user.id" ng-click="editComment(comment.id)">
+                                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                            </a>
+                                            <a href="" ng-if="comment.user_id == user.id" ng-click="delete(comment.id)">
+                                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <p ng-if="!isEditCmt(comment.id)">{{ comment.content }}</p>
+                                    <div ng-if="isEditCmt(comment.id)">
+
+                                        <form ng-submit="update({ comment: comment })">
+                                            <div class="bootstrap-tab-text-grid">
+                                                <textarea class="form-control" rows="1" ng-model="comment.content"></textarea>
+                                                <button type="submit" class="btn btn-primary pull-right">comment</button>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <hr>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <ul ng-if="comment.comments">
+                                <li ng-repeat="comment in comment.comments" ng-include="'categoryTree'"></li>
+                            </ul>
+                            <div ng-if="isAuthenticated && isSetComment(comment.id)">
+                                <form ng-submit="send({parent_id: comment.id, content: content})">
+                                    <div class="bootstrap-tab-text-grid">
+                                        <div class="bootstrap-tab-text-grid-left">
+                                            <img ng-src="{{ user.avatar }}" alt="{{ user.name }}" class="img-responsive">
+                                        </div>
+                                        <div class="bootstrap-tab-text-grid-right">
+                                            <ul>
+                                                <li><a href="">{{ user.name }}</a></li>
+                                            </ul>
+                                            <textarea class="form-control" rows="1" ng-model="content"></textarea>
+                                            <button type="submit" class="btn btn-primary pull-right">comment</button>
+                                        </div>
+                                        <div class="clearfix"> </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </script>
+                        <ul>
+                            <li ng-repeat="comment in comments" ng-include="'categoryTree'"></li>
+                        </ul> 
+
+                        <div class="fb-comments" 
+                        dyn-fb-comment-box page-href="{{curPath}}" 
+                        data-numposts="5" 
+                        data-colorscheme="light" 
+                        data-width="100%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

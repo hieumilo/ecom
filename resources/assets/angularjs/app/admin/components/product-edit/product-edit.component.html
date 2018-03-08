@@ -1,0 +1,111 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <h1>{{ 'ADMIN.FORM.PRODUCT_EDIT' | translate }} </h1>
+    </section>
+    <section class="content">
+        <div class="box box-info">
+            <div class="box-header with-border">
+                <h3 class="box-title">{{ 'ADMIN.FORM.PRODUCT_EDIT' | translate }}</h3>
+            </div>
+            <form class="form-horizontal" ng-submit="save({ product: product })">
+                <div class="box-body">
+                    <div class="col-md-8">
+                        <div class="form-group" ng-class="{'has-error': hasErrorName}">
+                            <label for="" class="col-sm-2 control-label">
+                                {{ 'ADMIN.LABEL.NAME' | translate }}
+                            </label>
+                            <div class="col-sm-10">
+                                <input type="text" 
+                                class="form-control" id="" 
+                                placeholder="{{ 'ADMIN.LABEL.NAME' | translate }}" 
+                                ng-model="product.name">
+                                <p class="text-danger">{{ errorName }}</p>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error': hasErrorPrice}">
+                            <label for="" class="col-sm-2 control-label">
+                                {{ 'ADMIN.LABEL.PRICE' | translate }}
+                            </label>
+                            <div class="col-sm-10">
+                                <input type="text" 
+                                class="form-control" id="" 
+                                placeholder="{{ 'ADMIN.LABEL.PRICE' | translate }}" 
+                                ng-model="product.price">
+                                <p class="text-danger">{{ errorName }}</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">
+                                {{ 'ADMIN.LABEL.DESCRIPTION' | translate }}
+                            </label>
+                            <div class="col-sm-10">
+                                <input type="text" 
+                                class="form-control" id="" 
+                                placeholder="{{ 'ADMIN.LABEL.DESCRIPTION' | translate }}" 
+                                ng-model="product.description">
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error': hasErrorStock}">
+                            <label for="" class="col-sm-2 control-label">
+                                {{ 'ADMIN.LABEL.STOCK' | translate }}
+                            </label>
+                            <div class="col-sm-10">
+                                <input type="text" 
+                                class="form-control" id="" 
+                                placeholder="{{ 'ADMIN.LABEL.STOCK' | translate }}" 
+                                ng-model="product.stock">
+                                <p class="text-danger">{{ errorName }}</p>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error': hasErrorCategory}">
+                            <label for="" class="col-sm-2 control-label">
+                                {{ 'ADMIN.LABEL.CATEGORY' | translate }}
+                            </label>
+                            <div class="col-sm-10">
+                                <select class="form-control" 
+                                    ng-model="product.category_id" 
+                                    ng-options="category.id as category.name for category in categories">
+                                    <option value="">--0--</option>
+                                </select>
+                                <p class="text-danger">{{ errorName }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group" ng-class="{'has-error': haserimage}">
+                            <label for="" class="control-label">
+                                {{ 'ADMIN.LABEL.IMAGE' | translate }}
+                            </label>
+                            <!-- Show images -->  
+                            <div ng-repeat="img in product.images">
+                                <img ng-src="{{ img.image }}" alt="" class="image">
+                                <a href="javascript:void(0)" ng-click="removeImage($index)">
+                                    <i class="glyphicon glyphicon-remove"></i>
+                                </a>
+                            </div>   
+                            <div ng-repeat="item in uploader.queue">
+                                <div ng-thumb="{ file: item._file, height: 100 }"></div>
+                                <a href="javascript:void(0)" ng-click="item.remove()">
+                                    <i class="glyphicon glyphicon-remove"></i>
+                                </a>
+                            </div>
+                            <input type="file" 
+                            class="one" 
+                            nv-file-select="" 
+                            uploader="uploader" 
+                            multiple />
+                        </div>
+                    </div>
+                </div>
+                <div class="box-footer">
+                    <a href="javascript:window.history.back();" class="btn btn-default">
+                        {{ 'ADMIN.BUTTON.BACK' | translate }}
+                    </a>
+                    <button type="submit" class="btn btn-info pull-right">
+                        {{ 'ADMIN.BUTTON.UPDATE' | translate }}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>

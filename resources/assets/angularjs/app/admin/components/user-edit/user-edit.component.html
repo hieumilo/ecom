@@ -1,0 +1,38 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>{{ 'ADMIN.FORM.USER_EDIT' | translate }} </h1>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="box box-primary">
+                    <div class="box-body box-profile">
+                        <img class="profile-user-img img-responsive img-circle" 
+                        ng-src="{{ user.avatar }}" alt="{{ user.name }}">
+                        <h3 class="profile-username text-center">{{ user.name }}</h3>
+                        <p class="text-muted text-center">{{ user.email }}</p>
+                        <ul class="list-group list-group-unbordered">
+                            <li class="list-group-item">
+                                <b>{{ 'ADMIN.LABEL.PHONE' | translate }}</b> <a class="pull-right">{{ user.phone }}</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>{{ 'ADMIN.LABEL.ADDRESS' | translate }}</b> <a class="pull-right">{{ user.address }}</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>{{ 'ADMIN.LABEL.GENDER' | translate }}</b> <a class="pull-right">{{ user.gender }}</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>{{ 'ADMIN.LABEL.CREATED_AT' | translate }}</b> <a class="pull-right">{{ user.created_at }}</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+</div>

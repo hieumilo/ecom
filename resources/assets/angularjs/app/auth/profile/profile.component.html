@@ -1,0 +1,169 @@
+<br>
+<div class="container">
+    <div class="col-md-4">
+        <div class="css-treeview">
+            <h4>
+                {{ 'AUTH.PROFILE' | translate }} <br>
+                <img ng-src="{{ user.avatar }}" alt="" class="avatar">
+            </h4>
+
+            <ul class="tree-list-pad">
+                <li><label><span>{{ 'AUTH.NAME' | translate }} | </span>{{ user.name }}</label></li>
+                <li><label><span>{{ 'AUTH.EMAIL' | translate }} | </span>{{ user.email }}</label></li>
+                <li><label><span>{{ 'AUTH.PHONE' | translate }} | </span>{{ user.phone }}</label></li>
+                <li><label><span>{{ 'AUTH.ADDRESS' | translate }} | </span>{{ user.address }}</label></li>
+                <li><label><span>{{ 'AUTH.GENDER' | translate }} | </span>{{ user.gender }}</label></li>
+            </ul>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="col-md-8">
+        <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+            <ul id="myTab" class="nav nav-tabs" role="tablist">
+                <li role="presentation" ng-class="{ active: isSet(1) }">
+                    <a href="" data-toggle="tab" aria-expanded="false" ng-click="setTab(1)">Setting</a>
+                </li>
+                <li role="presentation" ng-class="{ active: isSet(2) }">
+                    <a href="" data-toggle="tab" aria-expanded="false" ng-click="setTab(2)">History</a>
+                </li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <div role="tabpanel" ng-class="{ active: isSet(1) }" class="tab-pane fade bootstrap-tab-text in" id="home" aria-labelledby="home-tab">
+                    <div class="login">
+                        <div class="login-right">
+                            <h3>{{ 'AUTH.LABEL_UPDATE' | translate }}</h3>
+                            <form ng-submit="update({ user: user })">
+                                <div class="form-group" ng-class="{'has-error': haserimage}">
+                                    <label for="" class="control-label">
+                                        {{ 'AUTH.AVATAR' | translate }}
+                                    </label>
+                                    <!-- Show images -->     
+                                    <div ng-repeat="item in uploader.queue">
+                                        <div ng-thumb="{ file: item._file, height: 100 }"></div>
+                                        <a href="javascript:void(0)" ng-click="item.remove()">
+                                            <i class="glyphicon glyphicon-remove"></i>
+                                        </a>
+                                    </div>
+                                    <input type="file" 
+                                    class="one" 
+                                    nv-file-select="" 
+                                    uploader="uploader" />
+                                </div>
+                                <div class="sign-in" ng-class="{'has-error': hasErrorName}">
+                                    <h4>{{ 'AUTH.NAME' | translate }} :</h4>
+                                    <input type="text" ng-model="user.name" required="" placeholder="{{ 'AUTH.NAME' | translate }}">    
+                                    <p class="text-danger">{{ errorName }}</p>
+                                </div>
+                                <div class="sign-in" ng-class="{'has-error': hasErrorEmail}">
+                                    <h4>{{ 'AUTH.EMAIL' | translate }} :</h4>
+                                    <input type="text" ng-model="user.email" required="" placeholder="{{ 'AUTH.EMAIL' | translate }}">    
+                                    <p class="text-danger">{{ errorEmail }}</p>
+                                </div>
+                                <div class="sign-in" ng-class="{'has-error': hasErrorPhone}">
+                                    <h4>{{ 'AUTH.PHONE' | translate }} :</h4>
+                                    <input type="text" ng-model="user.phone" required="" placeholder="{{ 'AUTH.PHONE' | translate }}">
+                                    <p class="text-danger">{{ errorPhone }}</p>
+                                </div>
+                                <div class="sign-in" ng-class="{'has-error': hasErrorAddress}">
+                                    <h4>{{ 'AUTH.ADDRESS' | translate }} :</h4>
+                                    <input type="text" ng-model="user.address" required="" placeholder="{{ 'AUTH.ADDRESS' | translate }}">
+                                    <p class="text-danger">{{ errorAddress }}</p>
+                                </div>
+                                <div class="sign-in" ng-class="{'has-error': hasErrorGender}">
+                                    <h4>{{ 'AUTH.GENDER' | translate }} :</h4>
+                                    <input type="radio" ng-model="user.gender" value="male"> {{ 'AUTH.MALE' | translate }}
+                                    <input type="radio" ng-model="user.gender" value="female"> {{ 'AUTH.FEMALE' | translate }}
+                                    <p class="text-danger">{{ errorGender }}</p>
+                                </div>
+                                <h3>{{ 'AUTH.LABEL_CHANGE_PASSWORD' | translate }}</h3>
+                                <div class="sign-in">
+                                    <h4>{{ 'AUTH.OLD_PASSWORD' | translate }} :</h4>
+                                    <input type="password" ng-model="user.old_password" placeholder="******"> 
+                                </div>
+                                <div class="sign-in">
+                                    <h4>{{ 'AUTH.NEW_PASSWORD' | translate }} :</h4>
+                                    <input type="password" ng-model="user.new_password" placeholder="******"> 
+                                </div>
+                                <div class="sign-in">
+                                    <h4>{{ 'AUTH.RE_PASSWORD' | translate }} :</h4>
+                                    <input type="password" ng-model="user.re_password" placeholder="******">
+                                </div>
+                                <div class="sign-in">
+                                    <input type="submit" value="{{ 'AUTH.BUTTON_UPDATE' | translate }}">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div role="tabpanel" 
+                ng-class="{ active: isSet(2) }" 
+                class="tab-pane fade bootstrap-tab-text in" 
+                id="profile" 
+                aria-labelledby="profile-tab">
+                    <div class="bootstrap-tab-text-grids">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>address</th>
+                                    <th>phone</th>
+                                    <th>price</th>
+                                    <th>created at</th>
+                                    <th>view</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in user.orders">
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ item.address }}</td>
+                                    <td>{{ item.phone }}</td>
+                                    <td>{{ item.price | currency }}</td>
+                                    <td>{{ item.created_at }}</td>
+                                    <td>
+                                        <a href="" ng-click="setTab(3);detail(item)">view</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div role="tabpanel" 
+                ng-class="{ active: isSet(3) }" 
+                class="tab-pane fade bootstrap-tab-text in" 
+                id="profile" 
+                aria-labelledby="profile-tab">
+                    <h2>Order</h2>
+                    <p>{{ order.address }}</p>
+                    <p>{{ order.phone }}</p>
+                    <p>{{ order.created_at }}</p>
+                    <div class="bootstrap-tab-text-grids">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>name</th>
+                                    <th>price</th>
+                                    <th>rate</th>
+                                    <th>quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in orderItems">
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ item.product.name }}</td>
+                                    <td>{{ item.product.price | currency }}</td>
+                                    <td>{{ item.product.rate }}</td>
+                                    <td>{{ item.quantity }}</td>
+                                </tr>
+                                <tr>
+                                    <td><a href="" ng-click="setTab(2)">back</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

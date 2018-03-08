@@ -1,0 +1,67 @@
+<div class="container">
+    <br>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="login-grids">
+                <div class="login">
+                    <div class="login-right">
+                        <h3>{{ 'SUGGEST.SUGGEST_TITLE' | translate }}</h3>
+                        <form ng-submit="send({ info: info })">
+                            <div class="form-group" ng-class="{'has-error': hasErrorEmail}">
+                                <h4>{{ 'SUGGEST.EMAIL' | translate }} :</h4>
+                                <input type="email" class="form-control" ng-model="info.email" required="" 
+                                placeholder="{{ 'SUGGEST.EMAIL' | translate }}">
+                                <p class="text-danger">{{ errorEmail }}</p>
+                            </div>
+                            <div class="form-group" ng-class="{'has-error': hasErrorName}">
+                                <h4>{{ 'SUGGEST.NAME' | translate }} :</h4>
+                                <input type="text" class="form-control" ng-model="info.name" required="" 
+                                placeholder="{{ 'SUGGEST.NAME' | translate }}">
+                                <p class="text-danger">{{ errorName }}</p>
+                            </div>
+                            <div class="form-group" ng-class="{'has-error': hasErrorPrice}">
+                                <h4>{{ 'SUGGEST.PRICE' | translate }} :</h4>
+                                <input type="number" class="form-control" ng-model="info.price" 
+                                placeholder="{{ 'SUGGEST.PRICE' | translate }}">
+                                <p class="text-danger">{{ errorPrice }}</p>
+                            </div>
+                            <div class="form-group">
+                                <h4>{{ 'SUGGEST.DESCRIPTION' | translate }} :</h4>
+                                <textarea name="" id="" class="form-control" rows="3" ng-model="info.description" 
+                                placeholder="{{ 'SUGGEST.DESCRIPTION' | translate }}"></textarea>
+                            </div>
+                            <div class="form-group" ng-class="{'has-error': hasErrorCategory}">
+                                <h4>{{ 'SUGGEST.CATEGORY' | translate }} :</h4>
+                                <select class="form-control" 
+                                ng-model="info.category_id" 
+                                ng-options="category.id as category.name for category in categories">
+                                    <option value="">--0--</option>
+                                </select>
+                                <p class="text-danger">{{ errorCategory }}</p>
+                            </div>
+                            <div class="form-group">
+                                <h4>{{ 'SUGGEST.IMAGE' | translate }} :</h4>
+                                <div ng-repeat="item in uploader.queue">
+                                <div ng-thumb="{ file: item._file, height: 100 }"></div>
+                                    <a href="javascript:void(0)" ng-click="item.remove()">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </a>
+                                </div>
+                                <input type="file" 
+                                nv-file-select="" 
+                                uploader="uploader" 
+                                multiple />
+                            </div>
+                            <hr>
+                            <div class="form-group">
+                                <input type="submit" value="{{ 'SUGGEST.BTN_SEND' | translate }}">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <p></p>
+            </div>
+        </div>
+    </div>
+</div>

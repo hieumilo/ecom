@@ -1,0 +1,44 @@
+<div class="container">
+    <br>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="login-grids">
+                <div class="login">
+                    <div class="login-right">
+                        <h3>{{ 'AUTH.LOGIN_TITLE' | translate }}</h3>
+                        <form ng-submit="login()">
+                            <div class="sign-in">
+                                <h4>{{ 'AUTH.EMAIL' | translate }} :</h4>
+                                <input type="text" value="Type here" ng-model="email" required="">    
+                            </div>
+                            <div class="sign-in">
+                                <h4>{{ 'AUTH.PASSWORD' | translate }} :</h4>
+                                <input type="password" value="Password" ng-model="password" required="">
+                                <a href="">{{ 'AUTH.FORGOT_PASSWORD' | translate }}</a>
+                                <a ui-sref="home.signup">{{ 'AUTH.BTN_SIGNUP' | translate }}</a>
+                            </div>
+                            <div class="single-bottom">
+                                <input type="checkbox" id="brand" value="">
+                                <label for="brand"><span></span>{{ 'AUTH.REMEMBER_ME' | translate }}</label>
+                            </div>
+                            <div class="sign-in">
+                                <input type="submit" value="{{ 'AUTH.BTN_LOGIN' | translate }}">
+                            </div>
+                        </form>
+                        <hr>
+                        <div class="social-buttons">
+                            <a class="btn btn-block btn-social btn-facebook" ng-click="authenticate('facebook')">
+                                <span class="fa fa-facebook"></span>{{ 'AUTH.BTN_LOGIN_FB' | translate }}
+                            </a>
+                            <a class="btn btn-block btn-social btn-google" ng-click="authenticate('google')">
+                                <span class="fa fa-google"></span>{{ 'AUTH.BTN_LOGIN_GG' | translate }}
+                            </a>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <p></p>
+            </div>
+        </div>
+    </div>
+</div>

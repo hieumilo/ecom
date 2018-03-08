@@ -1,0 +1,174 @@
+<div class="checkout" ng-init="checkout = false">
+    <div class="container" ng-show="!checkout">
+        <h3>{{ 'CART.CART_TITEL' | translate }}</h3>
+
+        <div class="table-responsive checkout-right animated wow slideInUp" data-wow-delay=".5s">
+            <table class="timetable_sub">
+                <thead>
+                    <tr>
+                        <th>{{ 'CART.IMAGE' | translate }}</th>
+                        <th>{{ 'CART.NAME' | translate }}</th>
+                        <th>{{ 'CART.PRICE' | translate }}</th>
+                        <th>{{ 'CART.QUANTITY' | translate }}</th>
+                        <th>{{ 'CART.VALUE' | translate }}</th>
+                        <th>{{ 'CART.REMOVE' | translate }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in cart.items">
+                        <td class="invert-image">
+                            <a ui-sref="home.product-detail({name: product.slug})">
+                                <img ng-src="{{ item.image }}" alt="{{ item.name }}" class="img-responsive">
+                            </a>
+                        </td>
+                        <td class="invert">{{ item.name }}</td>
+                        <td class="invert">{{ item.price | currency }}</td>
+                        <td class="invert">
+                             <div class="quantity"> 
+                                <div class="quantity-select">                           
+                                    <div class="entry value-minus" 
+                                        ng-class="{ 'active': item.quantity <= 1 }" 
+                                        ng-click="cart.addItem(item.id, item.name, item.image, item.price, -1)">
+                                    &nbsp;</div>
+                                    <input type="number" 
+                                        class="cart-input" 
+                                        ng-model="item.quantity" 
+                                        min="1" 
+                                        ng-change="cart.changeQuantity(item.id, item.name, item.image, item.price, item.quantity)">
+                                    <div class="entry value-plus" 
+                                        ng-class="{ 'active': item.quantity > 90 }" 
+                                        ng-click="cart.addItem(item.id, item.name, item.image, item.price, 1)">
+                                    &nbsp;</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="invert">{{ item.price * item.quantity | currency }}</td>
+                        <td class="invert-closeb">
+                            <div class="rem">
+                                <a href="" 
+                                ng-click="cart.addItem(item.id, item.name, item.image, item.price, -99999)">
+                                    <i class="glyphicon glyphicon-remove"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr ng-show="cart.items.length">
+                        <td colspan="6">
+                            <a href="" 
+                            class="pull-right" 
+                            ng-click="cart.clearItems()" 
+                            ng-disabled="cart.getTotalCount() < 1">
+                                {{ 'CART.CLEAR_SHOPPING_CART' | translate }}
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="checkout-left"> 
+            <div class="checkout-right-basket animated wow slideInRight">
+                <a ui-sref="home.page">
+                    <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+                    {{ 'CART.BACK_TO_SHOPPING' | translate }}
+                </a>
+            </div>
+            <div class="checkout-left-basket animated wow slideInLeft" data-wow-delay=".5s">
+                <h4>{{ 'CART.SHOPPING_BASKET' | translate }}</h4>
+                <ul>
+                    <li>
+                        {{ 'CART.ITEM' | translate }} <i></i> 
+                        <span>{{ cart.getTotalCount() }}</span>
+                    </li>
+                    <li>
+                        {{ 'CART.TOTAL' | translate }} <i></i> 
+                        <span>{{ cart.getTotalPrice() | currency }}</span>
+                    </li>
+                    <li>
+                        <a href="" ng-click="checkout = !checkout">check out</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+    <div class="container" ng-show="checkout">
+        <div class="order">
+            <h3>{{ 'CART.ORDER' | translate }}</h3>
+            <hr>
+            <div class="row">
+                <div class="col-md-6">
+                    <strong class="col-sm-3">{{ 'CART.USER_NAME' | translate }} : </strong>
+                    <div class="col-sm-9">
+                        <label for="">{{ user.name }}</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <strong class="col-sm-3">{{ 'CART.USER_EMAIL' | translate }} : </strong>
+                    <div class="col-sm-9">
+                        <label for="">{{ user.email }}</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <strong class="col-sm-3">{{ 'CART.USER_ADDRESS' | translate }} : </strong>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="" ng-model="user.address">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <strong class="col-sm-3">{{ 'CART.QUANTITY' | translate }} : </strong>
+                    <div class="col-sm-9">
+                        <label for="">{{ order.totalCount }}</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <strong class="col-sm-3">{{ 'CART.PRICE' | translate }} : </strong>
+                    <div class="col-sm-9">
+                        <label for="">{{ order.totalPrice | currency }}</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <strong class="col-sm-3">{{ 'CART.USER_PHONE' | translate }} : </strong>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="" ng-model="user.phone">
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div ng-if="products">
+                <ul>
+                    <li ng-repeat="product in products">
+                        Number of product {{ product.name }} only {{ product.stock }}
+                    </li>
+                </ul>
+                <hr>
+            </div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>{{ 'CART.NAME' | translate }}</th>
+                        <th>{{ 'CART.PRICE' | translate }}</th>
+                        <th>{{ 'CART.QUANTITY' | translate }}</th>
+                        <th>{{ 'CART.VALUE' | translate }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in order.items">
+                        <td class="invert">{{ item.name }}</td>
+                        <td class="invert">{{ item.price | currency }}</td>
+                        <td class="invert">{{ item.quantity }}</td>
+                        <td class="invert">{{ item.price * item.quantity | currency }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <a href="" class="btn btn-default" ng-click="checkout = !checkout">{{ 'CART.BACK' | translate }}</a>
+            <button class="btn btn-primary pull-right" 
+            ng-if="cart.getTotalCount() > 0 && isAuthenticated && show"
+            ng-click="sendOrder()">
+                {{ 'CART.ORDER' | translate }}
+            </button>
+            <button class="btn btn-primary pull-right disabled" ng-if="!show">
+                <i class="fa fa-spinner fa-spin fa-fw"></i>
+            </button>
+        </div>
+    </div>
+</div>

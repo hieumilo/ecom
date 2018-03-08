@@ -1,0 +1,119 @@
+form .search {
+    width: 88%;
+}
+form .sear-sub {
+    width: 12%;
+}
+.login .login-right {
+    width: 100%;
+}
+.sorting {
+    width: auto;
+    margin-right: 20px;
+}
+.sorting h6 {
+    margin-right: 10px;
+}
+.sorting a i {
+    font-size: 30px;
+}
+.no-pad-men {
+    margin-bottom: 20px;
+}
+.tree-list-pad {
+    padding: 30px 0px;
+}
+.avatar {
+    width: 150px;
+    height: auto;
+}
+.login-right {
+    width: 90%;
+}
+.product-easy {
+    padding: 0;
+}
+.ele-bottom-grid {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.timetable_sub td {
+    max-width: 300px;
+}
+.checkout-right-basket {
+    margin: 2em 0 0 0em;
+}
+.product-men img {
+    height: 250px;
+}
+.men-pro-item {
+    margin-bottom: 30px;
+}
+.star-rating {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+.star-rating .star {
+    padding: 1px;
+    color: #ddd;
+    font-size: 20px;
+    text-shadow: .05em .05em #aaa;
+    list-style-type: none;
+    display: inline-block;
+    cursor: pointer;
+}
+.star-rating .star.filled {
+    color: #fd0;
+}
+.star-rating.readonly .star.filled {
+    color: #666;
+}
+.bootstrap-tab-text-grid-left {
+    width: 7%;
+}
+.bootstrap-tab-text-grid-right {
+    width: 93%;
+}
+ul li {
+    list-style: none;
+}
+.in ul > li {
+    margin-left: 50px;
+    list-style: none;
+}
+.in div form {
+    margin-left: 50px;
+}
+.bootstrap-tab-text-grid-right p {
+    margin: 0 50px 10px;
+}
+.checkout h3 {
+    margin: 0 0 1em;
+}
+.order {
+    box-shadow: 0px 0px 15px 0px #D6D6D6;
+    padding: 50px 50px;
+}
+.cart-input {
+    cursor: default;
+    width: 40px;
+    height: 40px;
+    padding: 8px 0px;
+    color: #000000;
+    line-height: 24px;
+    border: 1px solid #B2B2B2;
+    text-align: center;
+    display: inline-block;
+    margin-right: 3px;
+}
+ul.multi-column-dropdown li a {
+    padding-left: 20px;
+    color: #337ab7;
+}
+.login-right input[type="text"], .login-right input[type="password"] {
+    color: #000000;
+}
+.css-treeview ul, .css-treeview li {
+    margin-left: 7px;
+}

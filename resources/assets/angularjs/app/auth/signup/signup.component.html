@@ -1,0 +1,57 @@
+<div class="container">
+    <br>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="login-grids">
+                <div class="login">
+                    <div class="login-right">
+                        <h3>{{ 'AUTH.SIGNUP_TITLE' | translate }}</h3>
+                        <form ng-submit="signup()">
+                            <div class="sign-in" ng-class="{'has-error': hasErrorName}">
+                                <h4>{{ 'AUTH.NAME' | translate }} :</h4>
+                                <input type="text" ng-model="user.name" required placeholder="{{ 'AUTH.NAME' | translate }}">    
+                                <p class="text-danger">{{ errorName }}</p>
+                            </div>
+                            <div class="sign-in" ng-class="{'has-error': hasErrorEmail}">
+                                <h4>{{ 'AUTH.EMAIL' | translate }} :</h4>
+                                <input type="text" ng-model="user.email" required placeholder="{{ 'AUTH.EMAIL' | translate }}">    
+                                <p class="text-danger">{{ errorEmail }}</p>
+                            </div>
+                            <div class="sign-in" ng-class="{'has-error': hasErrorPassword}">
+                                <h4>{{ 'AUTH.PASSWORD' | translate }} :</h4>
+                                <input type="password" ng-model="user.password" required placeholder="******">
+                                <p class="text-danger">{{ errorPassword }}</p>
+                            </div>
+                            <div class="sign-in" ng-class="{'has-error': hasErrorRepassword}">
+                                <h4>{{ 'AUTH.RE_PASSWORD' | translate }} :</h4>
+                                <input type="password" ng-model="user.repassword" required placeholder="******">
+                                <p class="text-danger">{{ errorRepassword }}</p>
+                            </div>
+                            <div class="sign-in" ng-class="{'has-error': hasErrorPhone}">
+                                <h4>{{ 'AUTH.PHONE' | translate }} :</h4>
+                                <input type="text" ng-model="user.phone" required placeholder="{{ 'AUTH.PHONE' | translate }}">
+                                <p class="text-danger">{{ errorPhone }}</p>
+                            </div>
+                            <div class="sign-in" ng-class="{'has-error': hasErrorAddress}">
+                                <h4>{{ 'AUTH.ADDRESS' | translate }} :</h4>
+                                <input type="text" ng-model="user.address" required placeholder="{{ 'AUTH.ADDRESS' | translate }}">
+                                <p class="text-danger">{{ errorAddress }}</p>
+                            </div>
+                            <div class="sign-in" ng-class="{'has-error': hasErrorGender}">
+                                <h4>{{ 'AUTH.GENDER' | translate }} :</h4>
+                                <input type="radio" ng-model="user.gender" value="1"> {{ 'AUTH.MALE' | translate }}
+                                <input type="radio" ng-model="user.gender" value="0"> {{ 'AUTH.FEMALE' | translate }}
+                                <p class="text-danger">{{ errorGender }}</p>
+                            </div>
+                            <div class="sign-in">
+                                <input type="submit" value="{{ 'AUTH.BTN_SIGNUP' | translate }}">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <p></p>
+            </div>
+        </div>
+    </div>
+</div>

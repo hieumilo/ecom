@@ -1,0 +1,114 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>{{ 'ADMIN.LABEL.DASHBOARD' | translate }} 
+            <button class="btn btn-default pull-right" ng-click="export()">
+                {{ 'ADMIN.BUTTON.EXPORT' | translate }}
+            </button>
+        </h1>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-aqua">
+                    <div class="inner">
+                        <h3>{{ new_order }}</h3>
+                        <p>{{ 'ADMIN.LABEL.ORDER' | translate }}</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-bag"></i>
+                    </div>
+                    <a ui-sref="admin.order-list" class="small-box-footer">
+                        {{ 'ADMIN.LABEL.MORE_INFO' | translate }} 
+                        <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-green">
+                    <div class="inner">
+                        <h3>{{ new_suggest }}</h3>
+                        <p>{{ 'ADMIN.LABEL.NEW_SUGGEST' | translate }}</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-stats-bars"></i>
+                    </div>
+                    <a ui-sref="admin.suggest-list" class="small-box-footer">
+                        {{ 'ADMIN.LABEL.MORE_INFO' | translate }} 
+                        <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-yellow">
+                    <div class="inner">
+                        <h3>{{ user }}</h3>
+                        <p>{{ 'ADMIN.LABEL.USER' | translate }}</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-person"></i>
+                    </div>
+                    <a ui-sref="admin.user-list" class="small-box-footer">
+                        {{ 'ADMIN.LABEL.MORE_INFO' | translate }} 
+                        <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-red">
+                    <div class="inner">
+                        <h3>{{ product }}</h3>
+                        <p>{{ 'ADMIN.LABEL.PRODUCT' | translate }}</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-pie-graph"></i>
+                    </div>
+                    <a ui-sref="admin.product-list" class="small-box-footer">
+                        {{ 'ADMIN.LABEL.MORE_INFO' | translate }} 
+                        <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- ./col -->
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="box box-success">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">
+                            {{ 'ADMIN.LABEL.TOP_5_PRODUCT' | translate }} 
+                        </h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="chart">
+                            <canvas id="bar" 
+                            class="chart chart-bar" 
+                            chart-data="data_bar" 
+                            chart-labels="labels_bar"
+                            chart-series="series_bar" 
+                            chart-options="options_bar"></canvas>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+</div>

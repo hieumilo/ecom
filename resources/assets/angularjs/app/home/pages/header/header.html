@@ -1,0 +1,122 @@
+<!-- header-bot -->
+<div class="header-bot">
+    <div class="container">
+        <div class="col-md-3 header-left">
+            <h1><a ui-sref="home.page"><img src="public/images/logo/logo.png"></a></h1>
+        </div>
+        <div class="col-md-5 header-middle">
+            <form ng-submit="search()">
+                <div class="search">
+                    <input type="search" ng-model="search_text" placeholder="{{ 'LB_SEARCH_TEXT' | translate }}">
+                </div>
+                <div class="sear-sub">
+                    <input type="submit" value=" ">
+                </div>
+                <div class="clearfix"></div>
+            </form>
+        </div>
+        <div class="col-md-4 footer-bottom">
+            <div class="pull-right" ng-show="!isAuthenticated">
+                <a ui-sref="home.login" class="">{{ 'AUTH.BTN_LOGIN' | translate }}</a>
+            </div>
+            <div class="dropdown pull-right" ng-show="isAuthenticated">
+                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                    {{ username }} <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li ng-if="is_admin">
+                        <a ui-sref="admin.dashboard">{{ 'AUTH.MANAGE' | translate }}</a>
+                    </li>
+                    <li>
+                        <a ui-sref="home.profile">{{ 'AUTH.PROFILE' | translate }}</a>
+                    </li>
+                    <li>
+                        <a ui-sref="logout" class="">{{ 'AUTH.BTN_LOGOUT' | translate }}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<div class="ban-top">
+    <div class="container">
+        <div class="top_nav_left">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse menu--shylock" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav menu__list">
+                            <li class="active menu__item menu__item--current">
+                                <a class="menu__link" ui-sref="home.page">
+                                    {{ 'HEADER.HOME' | translate }}
+                                </a>
+                            </li>
+
+                            <li class="dropdown menu__item">
+                                <a href="" 
+                                class="dropdown-toggle menu__link" 
+                                data-toggle="dropdown" role="button" 
+                                aria-haspopup="true" 
+                                aria-expanded="false">
+                                    {{ 'HEADER.CATEGORY' | translate }} <span class="caret"></span>
+                                </a>
+                                <script type="text/ng-template" id="categoryTree">
+                                    <a ui-sref="home.product-list({ name: category.slug })">{{ category.name }}</a>
+                                    <ul ng-if="category.categories" class="multi-column-dropdown">
+                                        <li ng-repeat="category in category.categories" ng-include="'categoryTree'"></li>
+                                    </ul>
+                                </script>
+                                <ul class="dropdown-menu multi-column columns-3">
+                                    <div class="row">
+                                        <li class="col-sm-3 multi-gd-img" ng-repeat="category in categories" ng-include="'categoryTree'"></li>
+                                    </div>
+                                </ul>
+                            </li>
+
+                            <li class=" menu__item">
+                                <a class="menu__link" ui-sref="home.recently">
+                                    {{ 'HEADER.VIEW_RECENTLY' | translate }}
+                                </a>
+                            </li>
+                            <li class=" menu__item">
+                                <a class="menu__link" ui-sref="home.suggest">
+                                    {{ 'HEADER.SUGGEST' | translate }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>  
+        </div>
+        <div class="top_nav_right">
+            <div class="cart box_1">
+                <a ui-sref="home.cart">
+                    <h3> 
+                        <div class="total">
+                            <i class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></i>
+                            <span class="simpleCart_total"></span> 
+                            ( {{ cart.getTotalCount() }} {{ 'HEADER.CART.ITEMS' | translate }})
+                        </div>
+                    </h3>
+                </a>
+                <p ng-if="cart.getTotalCount() == 0">
+                    <a href="javascript:;" class="simpleCart_empty">{{ 'HEADER.CART.EMPTY' | translate }}</a>
+                </p>
+                <p ng-if="cart.getTotalCount() > 0">
+                    <a href="javascript:;" class="simpleCart_empty">{{cart.getTotalPrice() | currency}}</a>
+                </p>
+            </div>  
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
